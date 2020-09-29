@@ -1,6 +1,7 @@
 ﻿'===========================================================
 '20200929 - DJ:  Updated project creation sync loop to break out and fail the report
 '				 if it takes more than 90 seconds to create the project.
+'20200929 - DJ:  Updated impoper syntax in the Exit Do
 '===========================================================
 
 
@@ -137,7 +138,7 @@ Do
 	If Counter >=90 Then
 		msgbox("Something is broken, status of the request hasn't shown up to be approved.")
 		Reporter.ReportEvent micFail, "Create Project", "The project creation didn't finish within " & Counter & " seconds."
-		Loop
+		Exit Do
 	End If
 Loop Until AIUtil.FindTextBlock("Status: Closed (Approved)").Exist
 
