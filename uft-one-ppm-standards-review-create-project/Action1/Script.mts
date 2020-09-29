@@ -1,4 +1,10 @@
 ﻿'===========================================================
+'20200929 - DJ:  Updated project creation sync loop to break out and fail the report
+'				 if it takes more than 90 seconds to create the project.
+'===========================================================
+
+
+'===========================================================
 'Function to Create a Random Number with DateTime Stamp
 '===========================================================
 Function fnRandomNumberWithDateTimeStamp()
@@ -130,6 +136,8 @@ Do
 	wait(1)
 	If Counter >=90 Then
 		msgbox("Something is broken, status of the request hasn't shown up to be approved.")
+		Reporter.ReportEvent micFail, "Create Project", "The project creation didn't finish within " & Counter & " seconds."
+		Loop
 	End If
 Loop Until AIUtil.FindTextBlock("Status: Closed (Approved)").Exist
 
