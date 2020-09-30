@@ -3,6 +3,7 @@
 '				 if it takes more than 90 seconds to create the project.
 '20200929 - DJ:  Updated impoper syntax in the Exit Do
 '20200929 - DJ: Added .sync statements after .click statements and additional tuning
+'20200930 - DJ: Added additional step to click on the Status label before attempting to type in the status field
 '===========================================================
 
 
@@ -75,6 +76,7 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 AIUtil("text_box", "Request Type:").Type "PFM - Proposal"
 AIUtil("text_box", "Assigned To").Click
+AIUtil.FindText("Status").Click
 AppContext.Sync																				'Wait for the browser to stop spinning
 
 '===========================================================================================
