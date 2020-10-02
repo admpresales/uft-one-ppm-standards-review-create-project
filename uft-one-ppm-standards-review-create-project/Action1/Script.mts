@@ -9,6 +9,7 @@
 '20201001 - DJ: Changed setting of the project manager to be VRI as lower resolution settings can cause the label to not be associated to the field
 '20201001 - DJ: Changed setting of the project manager to be traditional OR as the resolution can throw off the VRI too
 '20201001 - DJ: Added a click loop for Execute Now
+'20201001 - DJ: Fixed logic error in Execute Now step
 '===========================================================
 
 
@@ -175,9 +176,6 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 'BP:  Click the Execute Now button
 '===========================================================================================
-Set ClickStatement = AIUtil.FindTextBlock("Execute Now")
-Set SuccessStatement = AIUtil("text_box", "'Project Manager:")
-ClickLoop AppContext, ClickStatement, SuccessStatement
 'AIUtil.FindTextBlock("Execute Now").Click
 Counter = 0
 Do
