@@ -8,6 +8,7 @@
 '20201001 - DJ: Changed the Execute Now from button to text, on lower resolution settings button isn't properly identified
 '20201001 - DJ: Changed setting of the project manager to be VRI as lower resolution settings can cause the label to not be associated to the field
 '20201001 - DJ: Changed setting of the project manager to be traditional OR as the resolution can throw off the VRI too
+'20201001 - DJ: Added a click loop for Execute Now
 '===========================================================
 
 
@@ -174,7 +175,22 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 'BP:  Click the Execute Now button
 '===========================================================================================
-AIUtil.FindTextBlock("Execute Now").Click
+Set ClickStatement = AIUtil.FindTextBlock("Execute Now")
+Set SuccessStatement = AIUtil("text_box", "'Project Manager:")
+ClickLoop AppContext, ClickStatement, SuccessStatement
+'AIUtil.FindTextBlock("Execute Now").Click
+Counter = 0
+Do
+	AIUtil.FindTextBlock("Execute Now").Click
+	AppContext.Sync																				'Wait for the browser to stop spinning
+	Counter = Counter + 1
+	wait(1)
+	If Counter >=90 Then
+		msgbox("Something is broken, the Requests hasn't shown up")
+		Reporter.ReportEvent micFail, "Click the Search text", "The Requests text didn't display within " & Counter & " attempts."
+		Exit Do
+	End If
+Loop While AIUtil.FindTextBlock("Execute Now").Exist(0)
 AppContext.Sync																				'Wait for the browser to stop spinning
 
 '===========================================================================================
