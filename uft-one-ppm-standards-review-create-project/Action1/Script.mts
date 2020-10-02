@@ -7,6 +7,7 @@
 '20201001 - DJ: Added the ClickLoop and the PPMProposalSearch functions, removed duplicative code
 '20201001 - DJ: Changed the Execute Now from button to text, on lower resolution settings button isn't properly identified
 '20201001 - DJ: Changed setting of the project manager to be VRI as lower resolution settings can cause the label to not be associated to the field
+'20201001 - DJ: Changed setting of the project manager to be traditional OR as the resolution can throw off the VRI too
 '===========================================================
 
 
@@ -131,7 +132,7 @@ AIUtil.FindTextBlock("Approval Queue - Key Attributes").Exist
 '===========================================================================================
 'BP:  Search for proposals in a status of "Standards Review"
 '===========================================================================================
-PPMProposalSearch "Finance Review", "Approved"
+PPMProposalSearch "Standards Review", "Status: Standards Review"
 
 '===========================================================================================
 'BP:  Click the left Approved button
@@ -157,9 +158,7 @@ ClickLoop AppContext, ClickStatement, SuccessStatement
 '===========================================================================================
 'BP:  Set the Project Manager to be Joseph Banks
 '===========================================================================================
-Set TextAnchor = AIUtil.FindText("Project Manager:")				'Set the IconAnchor to be the profile icon
-Set ValueAnchor = AIUtil("text_box", micNoText, micWithAnchorOnTop, TextAnchor)				'Set the Value field to be an "input" field, with any text, with the IconAnchor to its left
-ValueAnchor.Type "Joseph Banks"
+Browser("Search Requests").Page("Req #42957: More Information").WebEdit("Project Manager").Set "Joseph Banks"
 
 '===========================================================================================
 'BP:  Enter Standard Project (PPM) - Medium Size into the Projec Type field
