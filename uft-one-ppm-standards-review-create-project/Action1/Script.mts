@@ -6,6 +6,7 @@
 '20200930 - DJ: Added additional step to click on the Status label before attempting to type in the status field
 '20201001 - DJ: Added the ClickLoop and the PPMProposalSearch functions, removed duplicative code
 '20201001 - DJ: Changed the Execute Now from button to text, on lower resolution settings button isn't properly identified
+'20201001 - DJ: Changed setting of the project manager to be VRI as lower resolution settings can cause the label to not be associated to the field
 '===========================================================
 
 
@@ -156,7 +157,9 @@ ClickLoop AppContext, ClickStatement, SuccessStatement
 '===========================================================================================
 'BP:  Set the Project Manager to be Joseph Banks
 '===========================================================================================
-AIUtil("text_box", "'Project Manager:").Type "Joseph Banks"
+Set TextAnchor = AIUtil.FindText("Project Manager:")				'Set the IconAnchor to be the profile icon
+Set ValueAnchor = AIUtil("text_box", micNoText, micWithAnchorOnTop, TextAnchor)				'Set the Value field to be an "input" field, with any text, with the IconAnchor to its left
+ValueAnchor.Type "Joseph Banks"
 
 '===========================================================================================
 'BP:  Enter Standard Project (PPM) - Medium Size into the Projec Type field
