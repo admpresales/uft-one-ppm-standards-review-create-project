@@ -5,6 +5,7 @@
 '20200929 - DJ: Added .sync statements after .click statements and additional tuning
 '20200930 - DJ: Added additional step to click on the Status label before attempting to type in the status field
 '20201001 - DJ: Added the ClickLoop and the PPMProposalSearch functions, removed duplicative code
+'20201001 - DJ: Changed the Execute Now from button to text, on lower resolution settings button isn't properly identified
 '===========================================================
 
 
@@ -171,7 +172,7 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 'BP:  Click the Execute Now button
 '===========================================================================================
-AIUtil("button", "Execute Now").Click
+AIUtil.FindTextBlock("Execute Now").Click
 AppContext.Sync																				'Wait for the browser to stop spinning
 
 '===========================================================================================
