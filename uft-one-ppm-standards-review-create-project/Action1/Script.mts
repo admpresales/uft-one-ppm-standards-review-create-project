@@ -21,6 +21,7 @@
 '20201022 - DJ: Updated ClickLoop to gracefully abort if failure number reached
 '				Commented out remaining msgbox commands
 '				Updated non-ClickLoop break logic to be 3 attempts instead of 90
+'20201022 - DJ: Changed break logic back to 90 for the project creation step, as that may take much longer than only 3 attempts
 '===========================================================
 
 '===========================================================
@@ -205,9 +206,9 @@ Counter = 0
 Do
 	Counter = Counter + 1
 	wait(1)
-	If Counter >=3 Then
+	If Counter >=90 Then
 		'msgbox("Something is broken, status of the request hasn't shown up to be approved.")
-		Reporter.ReportEvent micFail, "Create Project", "The project creation didn't finish within " & Counter & " seconds."
+		Reporter.ReportEvent micFail, "Create Project", "The project creation didn't finish within " & Counter & " loop wait attempts."
 		Exit Do
 	End If
 Loop Until AIUtil.FindTextBlock("Status: Closed (Approved)").Exist(1)
