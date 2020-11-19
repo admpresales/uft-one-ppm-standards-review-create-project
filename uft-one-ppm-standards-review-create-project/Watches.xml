@@ -1,0 +1,5 @@
+﻿<Properties>
+  <WatchEntry0 value="AIUtil.FindText(&quot;Status: ITSC Review&quot;).Exist" />
+  <WatchEntry1 value="AIUtil.FindText(&quot;ITSC Review&quot;, micFromBottom, 1).Exist" />
+  <WatchEntry2 value="AIUtil.FindText(&quot;Status: ITSC Review&quot;, micFromTop, 1).Exist" />
+</Properties>

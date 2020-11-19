@@ -45,7 +45,7 @@ Function ClickLoop (AppContext, ClickStatement, SuccessStatement)
 			AIUtil.SetContext AppContext																'Tell the AI engine to point at the application
 			Browser("Search Requests").Page("Req Details").WebElement("menuUserIcon").Click
 			AppContext.Sync																				'Wait for the browser to stop spinning
-			AIUtil.FindText("Sign Out (").Click
+			AIUtil.FindText("Sign Out").Click
 			AppContext.Sync																				'Wait for the browser to stop spinning
 			While Browser("CreationTime:=0").Exist(0)   												'Loop to close all open browsers
 				Browser("CreationTime:=0").Close 
@@ -155,7 +155,7 @@ ClickLoop AppContext, ClickStatement, SuccessStatement
 'BP:  Click the remiaining Approved button
 '===========================================================================================
 Set ClickStatement = AIUtil.FindText("Approved")
-Set SuccessStatement = AIUtil.FindTextBlock("Status: ITSC Review")
+Set SuccessStatement = AIUtil.FindText("ITSC Review", micFromTop, 1)
 ClickLoop AppContext, ClickStatement, SuccessStatement
 
 '===========================================================================================
@@ -219,7 +219,7 @@ AppContext.Sync																				'Wait for the browser to stop spinning
 '===========================================================================================
 Browser("Search Requests").Page("Req Details").WebElement("menuUserIcon").Click
 AppContext.Sync																				'Wait for the browser to stop spinning
-AIUtil.FindTextBlock("Sign Out (Jonathan Kaplan)").Click
+AIUtil.FindText("Sign Out").Click
 AppContext.Sync																				'Wait for the browser to stop spinning
 
 AppContext.Close																			'Close the application at the end of your script
