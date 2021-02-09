@@ -22,6 +22,7 @@
 '				Commented out remaining msgbox commands
 '				Updated non-ClickLoop break logic to be 3 attempts instead of 90
 '20201022 - DJ: Changed break logic back to 90 for the project creation step, as that may take much longer than only 3 attempts
+'20210209 - DJ: Updated to start the mediaserver service on the UFT One host machine if it isn't running
 '===========================================================
 
 '===========================================================
@@ -106,7 +107,11 @@ Function PPMProposalSearch (CurrentStatus, NextAction)
 	
 End Function
 
-Dim BrowserExecutable, Counter, rc
+Dim BrowserExecutable, Counter, rc, oShell
+
+Set oShell = CreateObject ("WSCript.shell")
+oShell.run "powershell -command ""Start-Service mediaserver"""
+Set oShell = Nothing
 
 While Browser("CreationTime:=0").Exist(0)   												'Loop to close all open browsers
 	Browser("CreationTime:=0").Close 
